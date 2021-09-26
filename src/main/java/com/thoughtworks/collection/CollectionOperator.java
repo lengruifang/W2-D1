@@ -9,17 +9,17 @@ import java.util.stream.Collectors;
 
 public class CollectionOperator {
     public List<Integer> getListByInterval(int left, int right) {
-        List<Integer> arr = new ArrayList<>();
+        List<Integer> result = new ArrayList<>();
         if(left < right){
             for (int i = left; i <= right; i++) {
-                arr.add(i);
+                result.add(i);
             }
         } else{
             for (int i = left; i >= right; i--) {
-                arr.add(i);
+                result.add(i);
             }
         }
-        return arr;
+        return result;
     }
 
     public List<Integer> getEvenListByIntervals(int left, int right) {
@@ -35,16 +35,16 @@ public class CollectionOperator {
     }
 
     public List<Integer> popCommonElement(int[] firstArray, int[] secondArray) {
-        List<Integer> arr = Arrays.stream(secondArray).boxed().collect(Collectors.toList());
-        return   Arrays.stream(firstArray).boxed().filter(m -> arr.contains(m)).collect(Collectors.toList());
+        List<Integer> secondArraylist = Arrays.stream(secondArray).boxed().collect(Collectors.toList());
+        return   Arrays.stream(firstArray).boxed().filter(m -> secondArraylist.contains(m)).collect(Collectors.toList());
     }
 
     public List<Integer> addUncommonElement(Integer[] firstArray, Integer[] secondArray) {
 
-        List<Integer> arr1 = Arrays.stream(firstArray).collect(Collectors.toList());
-        List<Integer> arr2 = Arrays.stream(secondArray).collect(Collectors.toList());
-        arr1.addAll(arr2);
+        List<Integer> firstArraylist = Arrays.stream(firstArray).collect(Collectors.toList());
+        List<Integer> secondArraylist = Arrays.stream(secondArray).collect(Collectors.toList());
+        firstArraylist.addAll(secondArraylist);
 
-        return arr1.stream().distinct().collect(Collectors.toList());
+        return firstArraylist.stream().distinct().collect(Collectors.toList());
     }
 }
