@@ -55,11 +55,11 @@ public class Add {
     }
 
     public List<Integer> getProcessedList(List<Integer> arrayList) {
-        List<Integer> arr = new ArrayList<>();
+        List<Integer> ElementsAdd = new ArrayList<>();
         for (int i = 0; i < arrayList.size() - 1; i++) {
-            arr.add((arrayList.get(i) + arrayList.get(i + 1))*3);
+            ElementsAdd.add((arrayList.get(i) + arrayList.get(i + 1))*3);
         }
-        return  arr;
+        return  ElementsAdd;
     }
 
     public double getMedianOfEven(List<Integer> arrayList) {
@@ -79,9 +79,9 @@ public class Add {
     }
 
     public List<Integer> sortByEvenAndOdd(List<Integer> arrayList) {
-        List<Integer> arr =  arrayList.stream().filter(m -> m % 2 == 0).sorted().collect(Collectors.toList());
-        arr.addAll(arrayList.stream().filter(m -> m % 2 == 1).sorted(Comparator.reverseOrder()).collect(Collectors.toList()));
-        return arr;
+        List<Integer> ArrlistSort =  arrayList.stream().filter(m -> m % 2 == 0).sorted().collect(Collectors.toList());
+        ArrlistSort.addAll(arrayList.stream().filter(m -> m % 2 == 1).sorted(Comparator.reverseOrder()).collect(Collectors.toList()));
+        return ArrlistSort;
     }
 
 
