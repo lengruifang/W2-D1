@@ -16,7 +16,8 @@ public class Flaten {
     public List<Integer> transformToOneDimesional() {
         return Arrays.stream(array)/*将array放入流中*/
                 .flatMap(x -> Arrays.stream(x)/*将array的每个数组的元素放入流中*/)
-                .collect(Collectors.toList())/*将前面所有放入流中的元素集合成List*/;
+                /*flatMap表示将每个元素合取出，放进一个大的List中*/
+                .collect(Collectors.toList());
     }
 
     public List<Integer> transformToUnrepeatedOneDimesional() {
