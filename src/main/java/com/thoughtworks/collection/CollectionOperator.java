@@ -27,7 +27,7 @@ public class CollectionOperator {
     }
 
     public List<Integer> popEvenElments(int[] array) {
-        return   Arrays.stream(array).boxed().filter(m -> m % 2 == 0).collect(Collectors.toList());
+        return   Arrays.stream(array).boxed()/*将值装箱为Double类型*/.filter(m -> m % 2 == 0).collect(Collectors.toList());
     }
 
     public int popLastElment(int[] array) {
@@ -45,6 +45,6 @@ public class CollectionOperator {
         List<Integer> secondArraylist = Arrays.stream(secondArray).collect(Collectors.toList());
         firstArraylist.addAll(secondArraylist);
 
-        return firstArraylist.stream().distinct().collect(Collectors.toList());
+        return firstArraylist.stream().distinct()/*去重*/.collect(Collectors.toList());
     }
 }
