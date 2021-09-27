@@ -54,7 +54,8 @@ this.arrayList=arrayList;
 
     public boolean isEqual(List<Integer> arrayList) {
         return arrayList.containsAll(this.arrayList) && this.arrayList.containsAll(arrayList);
-
+//因为在测试方法中Reduce reduce = new Reduce(arrayList)是把arrayList放进去了，所以&&前面的实际是表示arrayList
+        //跟arrayList作比较，后面的则是arrayList跟differentArray作比较。this.arrayList是arrayList。
     }
     //实现接口SingleLink，然后再此函数内使用
     public Double getMedianInLinkList(SingleLink<Integer> singleLink) {
