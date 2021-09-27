@@ -56,7 +56,6 @@ public class MyMap {
             resultStrings.add(resultString(element));
         }
         return  resultStrings;
-        /*return array.stream().map(elem->).collect(Collectors.toList());*/
     }
 
     public List<Integer> sortFromBig() {
