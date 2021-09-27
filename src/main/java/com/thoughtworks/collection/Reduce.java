@@ -1,19 +1,21 @@
 package com.thoughtworks.collection;
 
-import main.java.com.thoughtworks.collection.MySingleLink;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import javax.naming.NoInitialContextException;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Reduce {
 
     List<Integer> arrayList;
 
     public Reduce(List<Integer> arrayList) {
-        this.arrayList = arrayList;
+this.arrayList=arrayList;
     }
 
     public int getMaximum() {
@@ -21,7 +23,11 @@ public class Reduce {
     }
 
     public double getMinimum() {
-        return Collections.min(arrayList);
+        return arrayList.stream().filter(e -> e != null).min((x,y)->x-y).orElse(null);
+        /*orElse()
+        当optional值不存在时，调用orElse()返回orElse()的参数，如果optional的值存在时返回optional的值
+        orElseGet()
+        当optional值不存在时，调用orElseGet()中接口调用的返回值，如果optional的值存在时返回optional的值*/
     }
 
     public double getAverage() {
@@ -29,61 +35,43 @@ public class Reduce {
     }
 
     public double getOrderedMedian() {
-        int size = arrayList.size();
-        if(size % 2 == 1){
-            return arrayList.get(size / 2);
-        }
-        else{
-            return(arrayList.get(size / 2 - 1) + arrayList.get(size / 2)) / 2.0;
-        }
+    Collections.sort(arrayList);
+    if (arrayList.size()%2==0){
+        return (double) (arrayList.get(arrayList.size()/2)+arrayList.get(arrayList.size()/2-1))/2;
+    }else {
+        return arrayList.get(arrayList.size()/2);
+    }
     }
 
     public int getFirstEven() {
-        return arrayList.stream().filter(x -> x % 2 == 0).findFirst().get();
+        return arrayList.stream().filter(num -> num % 2 == 0).findFirst().get();
     }
 
     public int getIndexOfFirstEven() {
-        for (int i = 0; i <= arrayList.size(); i++) {
-            if(arrayList.get(i) % 2 == 0){
-                return  i;
-            }
-        }
-        return -1;
+        int firstEven = arrayList.stream().filter(num -> num % 2 == 0).findFirst().get();
+        return arrayList.indexOf(firstEven);
     }
 
     public boolean isEqual(List<Integer> arrayList) {
-        if(this.arrayList.size() == arrayList.size()){
-            for (int i = 0; i < arrayList.size(); i++) {
-                if(this.arrayList.get(i) != arrayList.get(i)){
-                    return false;
-                }
-            }
-            return true;
-        }
-        else {
-            return  false;
-        }
+        return arrayList.containsAll(this.arrayList) && this.arrayList.containsAll(arrayList);
 
     }
     //实现接口SingleLink，然后再此函数内使用
-    public Double getMedianInLinkList(com.thoughtworks.collection.SingleLink<Integer> singleLink) {
-        for (Integer item : arrayList) {
-            singleLink.addTailPointer(item);
+    public Double getMedianInLinkList(SingleLink<Integer> singleLink) {
+        if (arrayList.size()%2==0){
+            return (double) (arrayList.get(arrayList.size()/2)+arrayList.get(arrayList.size()/2-1))/2;
+        }else {
+            return (double) arrayList.get(arrayList.size()/2);
         }
-        return getOrderedMedian();
     }
 
     public int getLastOdd() {
-        List<Integer> list = arrayList.stream().filter(x -> x % 2 == 1).collect(Collectors.toList());
-        return list.get(list.size() - 1);
+        List<Integer> oddList = arrayList.stream().filter(num -> num % 2 != 0).collect(Collectors.toList());
+        return oddList.get(oddList.size() - 1);
     }
 
     public int getIndexOfLastOdd() {
-        for (int i = arrayList.size()  - 1; i >= 0; i--) {
-            if(arrayList.get(i) % 2 == 1){
-                return  i;
-            }
-        }
-        return -1;
+        int num = getLastOdd();
+        return arrayList.indexOf(num);
     }
 }
